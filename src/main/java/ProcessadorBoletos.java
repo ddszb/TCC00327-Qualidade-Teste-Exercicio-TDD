@@ -17,6 +17,8 @@ public class ProcessadorBoletos {
     }
 
     public Fatura valida(Fatura fatura, List<Pagamento> pagamentos) {
+        double valorTotalPago = pagamentos.stream().map(Pagamento::getValorPago).reduce(0.0, Double::sum);
+        fatura.setPaga(valorTotalPago >= fatura.getValorTotal());
         return fatura;
     }
 }

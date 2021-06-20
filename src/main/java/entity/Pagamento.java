@@ -13,7 +13,10 @@ public class Pagamento {
     public Pagamento() {
     }
 
-    public Pagamento(double valorPago, Calendar data, String boleto) {
+    public Pagamento(double valorPago, Calendar data, String tipo) {
+        this.valorPago = valorPago;
+        this.data = data;
+        this.tipo = tipo;
     }
 
     public double getValorPago() {
