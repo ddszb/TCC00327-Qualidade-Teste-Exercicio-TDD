@@ -31,4 +31,18 @@ public class ProcessadorBoletosTest {
         Assert.assertTrue(fatura.isPaga());
         Assert.assertEquals(1, pagamentos.size());
     }
+
+    @Test
+    public void testeValidaFaturaNaoPaga(){
+        ProcessadorBoletos pb = new ProcessadorBoletos();
+        Fatura fatura = new Fatura(Calendar.getInstance(), "José", 1130, false);
+        List<Boleto> boletos = new ArrayList<>();
+        boletos.add(new Boleto(1, Calendar.getInstance(), 130.0));
+        boletos.add(new Boleto(2, Calendar.getInstance(), 430.0));
+
+        List<Pagamento> pagamentos = pb.pagarFatura(fatura, boletos);
+
+        Assert.assertFalse(fatura.isPaga());
+        Assert.assertEquals(2, pagamentos.size());
+    }
 }
