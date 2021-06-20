@@ -15,7 +15,7 @@ public class ProcessadorBoletosTest {
         ProcessadorBoletos pb = new ProcessadorBoletos();
         List<Boleto> boletos = new ArrayList<>();
         boletos.add(new Boleto(1, Calendar.getInstance(), 130.0));
-        Assert.assertNotNull( pb.processa(boletos));
+        Assert.assertNotNull( pb.pagarFatura(new Fatura(), boletos));
 
     }
 
@@ -26,9 +26,9 @@ public class ProcessadorBoletosTest {
         List<Boleto> boletos = new ArrayList<>();
         boletos.add(new Boleto(1, Calendar.getInstance(), 130.0));
 
-        List<Pagamento> pagamentos = pb.processa(boletos);
-        fatura = pb.valida(fatura, pagamentos);
+        List<Pagamento> pagamentos = pb.pagarFatura(fatura, boletos);
 
         Assert.assertTrue(fatura.isPaga());
+        Assert.assertEquals(1, pagamentos.size());
     }
 }

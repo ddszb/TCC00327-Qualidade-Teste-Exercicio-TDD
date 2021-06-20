@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ProcessadorBoletos {
 
-    public List<Pagamento> processa(List<Boleto> boletos){
+    private List<Pagamento> processa(List<Boleto> boletos){
         List<Pagamento> pagamentos = new ArrayList<>();
         boletos.forEach( b ->{
             Pagamento pagamento = new Pagamento( b.getValorPago(), b.getData(), "BOLETO");
@@ -16,9 +16,14 @@ public class ProcessadorBoletos {
         return pagamentos;
     }
 
-    public Fatura valida(Fatura fatura, List<Pagamento> pagamentos) {
+    private void valida(Fatura fatura, List<Pagamento> pagamentos) {
         double valorTotalPago = pagamentos.stream().map(Pagamento::getValorPago).reduce(0.0, Double::sum);
         fatura.setPaga(valorTotalPago >= fatura.getValorTotal());
-        return fatura;
+    }
+
+    public List<Pagamento> pagarFatura(Fatura fatura, List<Boleto> boletos){
+        List<Pagamento> pagamentos = processa(boletos);
+        valida(fatura, pagamentos);
+        return pagamentos;
     }
 }
