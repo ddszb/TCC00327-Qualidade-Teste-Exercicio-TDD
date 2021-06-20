@@ -1,4 +1,5 @@
 import entity.Boleto;
+import entity.Fatura;
 import entity.Pagamento;
 
 import java.util.ArrayList;
@@ -13,5 +14,9 @@ public class ProcessadorBoletos {
             pagamentos.add(pagamento);
         });
         return pagamentos;
+    }
+
+    public Fatura valida(Fatura fatura, List<Pagamento> pagamentos) {
+        return fatura;
     }
 }
